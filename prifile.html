@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>پروفایل من</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #fff0f5;
+      padding: 20px;
+      direction: rtl;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #ff4d6d;
+      text-align: center;
+    }
+    .info {
+      margin: 10px 0;
+    }
+    ul {
+      list-style: square;
+      padding-right: 20px;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: #ffe4ec;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-top: 1px solid #ccc;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    }
+    .nav-item {
+      text-decoration: none;
+      color: #ff4d6d;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>پروفایل من</h2>
+    <div class="info"><strong>📧 ایمیل:</strong> <span id="email">user@example.com</span></div>
+    <div class="info"><strong>🆔 آیدی:</strong> <span id="userId">jefigirl123</span></div>
+    <hr>
+    <div>
+      <strong>💗 سریال‌های مورد علاقه:</strong>
+      <ul id="favoritesList">
+        <!-- سریال‌ها از localStorage نمایش داده می‌شن -->
+      </ul>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="index.html" class="nav-item">🏠 خانه</a>
+    <a href="profile.html" class="nav-item">👤 پروفایل</a>
+    <a href="bgl.html" class="nav-item">🌈 BGL</a>
+  </div>
+
+  <script>
+    // ایمیل و آیدی تستی
+  document.getElementById("email").textContent = localStorage.getItem("jefiflix_user_email") || "وارد نشده";
+document.getElementById("userId").textContent = localStorage.getItem("jefiflix_user_name") || "وارد نشده";
+
+    const favList = JSON.parse(localStorage.getItem("jefiflix_favs")) || [];
+    const allSeries = JSON.parse(localStorage.getItem("jefiflix_series")) || [];
+
+    const favoritesList = document.getElementById("favoritesList");
+
+    favList.forEach(index => {
+      const series = allSeries[index];
+      if (series) {
+        const li = document.createElement("li");
+        li.textContent = series.title;
+        favoritesList.appendChild(li);
+      }
+    });
+  </script>
+  }
+</script>
+  </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>پنل مدیریت - JefiFlix</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <h1>افزودن سریال جدید</h1>
+
+  <form id="seriesForm">
+    <label>نام سریال:
+      <input type="text" id="title" required>
+    </label><br>
+
+    <label>کشور:
+      <select id="country">
+        <option>کره‌ای</option>
+        <option>چینی</option>
+        <option>تایلندی</option>
+      </select>
+    </label><br>
+
+    <label>تعداد قسمت‌ها:
+      <input type="number" id="episodes" required>
+    </label><br>
+
+    <label>امتیاز:
+      <input type="number" step="0.1" id="rating">
+    </label><br>
+
+    <label>توضیحات:
+      <textarea id="description"></textarea>
+    </label><br>
+
+    <label>کاور سریال:
+      <input type="file" id="cover" accept="image/*" required>
+    </label><br>
+
+    <label>قسمت‌ها (ویدیو):
+      <input type="file" id="videos" accept="video/mp4" multiple required>
+    </label><br>
+
+    <button type="submit">ذخیره سریال</button>
+  </form>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

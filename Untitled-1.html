@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>ورود به جفیفلیکس</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #fff0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      direction: rtl;
+    }
+    .login-box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+    h2 {
+      text-align: center;
+      color: #ff4d6d;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .bottom-text {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>ورود / ثبت‌نام</h2>
+    <input type="email" id="email" placeholder="ایمیل">
+    <input type="text" id="username" placeholder="آیدی (نام کاربری)">
+    <button onclick="login()">ورود به JefiFlix</button>
+    <div class="bottom-text">اطلاعاتت ذخیره می‌شه برای ورود دوباره 😊</div>
+  </div>
+
+  <script>
+    function login() {
+      const email = document.getElementById("email").value;
+      const username = document.getElementById("username").value;
+      if (email && username) {
+        localStorage.setItem("jefiflix_user_email", email);
+        localStorage.setItem("jefiflix_user_name", username);
+        alert("✅ خوش اومدی به JefiFlix!");
+        window.location.href = "index.html";
+      } else {
+        alert("⚠️ لطفاً همه فیلدها رو پر کن!");
+      }
+    }
+  </script>
+
+</body>
+</html>

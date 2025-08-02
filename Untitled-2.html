@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>پنل مدیریت | JefiFlix</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      direction: rtl;
+      background-color: #fff0f5;
+      padding: 30px;
+    }
+    input, textarea, button {
+      display: block;
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #ff4d6d;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    h2 {
+      text-align: center;
+      color: #ff4d6d;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>آپلود سریال جدید</h2>
+
+  <input type="text" id="title" placeholder="عنوان سریال">
+  <input type="text" id="country" placeholder="کشور (مثلاً کره)">
+  <input type="number" id="episodes" placeholder="تعداد قسمت‌ها">
+  <input type="text" id="rating" placeholder="امتیاز (مثلاً 8.7)">
+  <input type="url" id="cover" placeholder="لینک عکس کاور">
+
+  <textarea id="videoLinks" rows="5" placeholder="لینک قسمت‌ها (هر خط یک لینک)"></textarea>
+
+  <button onclick="uploadSeries()">ذخیره سریال</button>
+
+  <script>
+    function uploadSeries() {
+      const title = document.getElementById("title").value;
+      const country = document.getElementById("country").value;
+      const episodes = parseInt(document.getElementById("episodes").value);
+      const rating = document.getElementById("rating").value;
+      const cover = document.getElementById("cover").value;
+      const videoLinks = document.getElementById("videoLinks").value.split("\n").filter(link => link.trim() !== "");
+
+      if (!title || !country || !cover || !rating || videoLinks.length === 0) {
+        alert("لطفاً همه فیلدها رو کامل پر کن!");
+        return;
+      }
+
+      const newSeries = {
+        title,
+        country,
+        episodes,
+        rating,
+        cover,
+        videos: videoLinks
+      };
+
+      let all = JSON.parse(localStorage.getItem("jefiflix_series")) || [];
+      all.push(newSeries);
+      localStorage.setItem("jefiflix_series", JSON.stringify(all));
+
+      alert("✅ سریال با موفقیت ذخیره شد!");
+      document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+    }
+  </script>
+
+</body>
+</html>

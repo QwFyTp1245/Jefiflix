@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>نمایش سریال</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      direction: rtl;
+      background: #fff0f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    h2 {
+      color: #ff4d6d;
+    }
+    ul {
+      list-style-type: decimal;
+      padding-right: 20px;
+    }
+    li {
+      margin: 5px 0;
+    }
+    a {
+      text-decoration: none;
+      color: #ff4d6d;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html">← بازگشت</a>
+    <img id="seriesCover" src="" alt="کاور سریال">
+    <h2 id="seriesTitle"></h2>
+    <p><strong>کشور:</strong> <span id="seriesCountry"></span></p>
+    <p><strong>امتیاز:</strong> <span id="seriesRating"></span></p>
+    <p><strong>توضیح:</strong> <span id="seriesDesc"></span></p>
+    <hr>
+    <h3>📺 قسمت‌ها:</h3><button onclick="addToFavorites()">🍓 افزودن به علاقه‌مندی‌ها</button>
+    <ul id="episodeList"></ul>
+  </div>
+
+  <script>
+    const seriesIndex = new URLSearchParams(window.location.search).get("id");
+    const allSeries = JSON.parse(localStorage.getItem("jefiflix_series")) || [];
+    const series = allSeries[seriesIndex];
+
+    if (series) {
+      document.getElementById("seriesCover").src = series.cover;
+      document.getElementById("seriesTitle").textContent = series.title;
+      document.getElementById("seriesCountry").textContent = series.country;
+      document.getElementById("seriesRating").textContent = series.rating;
+      document.getElementById("seriesDesc").textContent = series.description;
+
+      const list = document.getElementById("episodeList");
+      series.videos.forEach((video, i) => {
+        const li = document.createElement("li");
+        li.textContent = قسمت ${i + 1} - ${video};
+        list.appendChild(li);
+      });
+    } else {
+      document.body.innerHTML = "<h2>سریال پیدا نشد!</h2>";
+    }
+  </script>
+ <script>
+function addToFavorites() {
+  let favs = JSON.parse(localStorage.getItem("jefiflix_favs")) || [];
+  if (!favs.includes(seriesIndex)) {
+    favs.push(seriesIndex);
+    localStorage.setItem("jefiflix_favs", JSON.stringify(favs));
+    alert("✅ اضافه شد به علاقه‌مندی‌ها!");
+  } else {
+    alert("⚠️ قبلاً اضافه شده!");
+  }
+}
+</script>const episodeList = document.getElementById("episodeList");
+
+if (series.videos && series.videos.length > 0) {
+  series.videos.forEach((link, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = <a href="${link}" target="_blank"> قسمت‌ها{index + 1}</a>;
+    episodeList.appendChild(li);
+  });
+} else {
+  episodeList.innerHTML = "<li>قسمتی برای پخش وجود ندارد.</li>";
+}
+</body>
+</html>
